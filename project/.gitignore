@@ -1,0 +1,73 @@
+# =========================
+# Ignore everything by default
+# =========================
+/*
+
+# =========================
+# Keep the project folder and its src subfolder
+# =========================
+!/project/
+project/src/
+!/project/src/**
+
+# =========================
+# Keep any .txt files anywhere
+# =========================
+!*.txt
+
+# =========================
+# IntelliJ IDEA
+# =========================
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# Eclipse
+# =========================
+.project
+.classpath
+.settings/
+bin/
+
+# =========================
+# NetBeans
+# =========================
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# =========================
+# Build output folders
+# =========================
+out/
+build/
+target/
+
+# =========================
+# OS generated files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Compiled Java classes
+# =========================
+*.class
+انا عايز ده يتجاهل اضافة فولدر ال src
+بس يضيف اي حاجة جواه
+
