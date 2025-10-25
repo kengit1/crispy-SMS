@@ -1,14 +1,13 @@
-# =========================
 # Ignore everything by default
-# =========================
 /*
 
-# =========================
-# Keep the project folder and its src subfolder
-# =========================
+# Allow the project folder and everything inside its src
 !/project/
-project/src/
 !/project/src/**
+
+# But ignore the src folder itself as an entry (so it doesn't appear empty)
+# Optional – only if you want to ignore the folder itself
+# /project/src/
 
 # =========================
 # Keep any .txt files anywhere
