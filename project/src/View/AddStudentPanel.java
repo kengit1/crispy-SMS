@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// 1. CHANGE: Was "extends JFrame", now "extends JPanel"
+
 public class AddStudentPanel extends JPanel {
     private JPanel Container1;
     private JTextField FnameText;

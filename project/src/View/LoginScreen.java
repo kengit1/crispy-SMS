@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// CHANGE: Made class non-public (best practice if it's only called from main)
+
 class LoginScreen extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
