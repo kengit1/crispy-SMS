@@ -1,12 +1,12 @@
 package View;
 
 import Model.Login;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// CHANGE: Made class non-public (best practice if it's only called from main)
 class LoginScreen extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -25,9 +25,9 @@ class LoginScreen extends JFrame {
         JPanel formPanel = new JPanel(new GridBagLayout());
         formPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); // Padding for components
+        gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JLabel headerLabel = new JLabel("Student Management System Login", SwingConstants.CENTER);
+        JLabel headerLabel = new JLabel("Student Management System Login", SwingConstants.CENTER); // [cite: 95]
         headerLabel.setFont(new Font("Arial", Font.BOLD, 16));
         add(headerLabel, BorderLayout.NORTH);
         gbc.gridx = 0;
@@ -49,7 +49,7 @@ class LoginScreen extends JFrame {
         gbc.gridwidth = 2;
         loginButton = new JButton("Login");
         loginButton.setPreferredSize(new Dimension(100, 30));
-        loginButton.setBackground(new Color(66, 133, 244)); // Google Blue
+        loginButton.setBackground(new Color(66, 133, 244));
         loginButton.setForeground(Color.WHITE);
         loginButton.setFocusPainted(false);
         formPanel.add(loginButton, gbc);
@@ -62,20 +62,18 @@ class LoginScreen extends JFrame {
         });
         JRootPane rootPane = SwingUtilities.getRootPane(this);
         rootPane.setDefaultButton(loginButton);
-        setVisible(true);
+        // setVisible(true); // Moved setVisible to the main method
     }
+
     private void attemptLogin() {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
         int validationResult = user.validateLogin(username, password);
         switch (validationResult) {
             case 0:
-                JOptionPane.showMessageDialog(this,
-                        "Login Successful! Welcome, Admin.",
-                        "Success",
-                        JOptionPane.INFORMATION_MESSAGE);
+                // Don't show a popup, just open the dashboard
                 openDashboard();
-                dispose();
+                dispose(); // Close the login window
                 break;
             case 1:
                 JOptionPane.showMessageDialog(this,
@@ -105,32 +103,21 @@ class LoginScreen extends JFrame {
         }
     }
 
-
-
-
-
     private void openDashboard() {
-        JFrame dashboard = new JFrame("SMS Dashboard - Home Screen");
-        dashboard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        dashboard.setSize(800, 600);
-        dashboard.setLocationRelativeTo(null);
-        JLabel welcomeLabel = new JLabel("Welcome to the Student Management System Dashboard!", SwingConstants.CENTER);
-        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        dashboard.add(welcomeLabel, BorderLayout.CENTER);
 
-        dashboard.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            MainFrame dashboard = new MainFrame();
+            dashboard.setVisible(true);
+        });
     }
 
-
-
-
-
+    /**
+     * This is now the MAIN ENTRY POINT for your entire application.
+     */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new LoginScreen();
-            }
+        SwingUtilities.invokeLater(() -> {
+            LoginScreen login = new LoginScreen();
+            login.setVisible(true);
         });
     }
 }

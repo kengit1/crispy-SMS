@@ -155,4 +155,8 @@ public class SearchAndUpdatePanel extends JPanel {
         departmentField.setText("");
         gpaField.setText("");
     }
+    public static void main(String[] args)
+    {
+        new SearchAndUpdatePanel(new Admin());
+    }
 }

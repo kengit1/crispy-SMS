@@ -1,13 +1,13 @@
 package View;
 
 import Model.Admin;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddStudentPanel extends JFrame{
+// 1. CHANGE: Was "extends JFrame", now "extends JPanel"
+public class AddStudentPanel extends JPanel {
     private JPanel Container1;
     private JTextField IDText;
     private JTextField FnameText;
@@ -18,15 +18,23 @@ public class AddStudentPanel extends JFrame{
     private JTextField GPAtext;
     private JButton ENTERButton;
 
-    public AddStudentPanel() {
-        setVisible(true);
-        setSize(800,600);
-        setTitle("Add Student");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(Container1);
+
+    private final Admin admin;
+
+
+    public AddStudentPanel(Admin admin) {
+
+        this.admin = admin;
+
+
+
+
+
+        add(Container1);
+
         ENTERButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent actionEvent){
+            public void actionPerformed(ActionEvent actionEvent) {
                 AddStudentOperations();
             }
         });
@@ -41,36 +49,38 @@ public class AddStudentPanel extends JFrame{
         String Gen = (String) Gender.getSelectedItem();
         String GPA = GPAtext.getText().trim();
 
-        Admin admin = new Admin();
+
 
         if (FirstName.isEmpty() || LastName.isEmpty() || Age.isEmpty() || GPA.isEmpty())
             JOptionPane.showMessageDialog(this, "All fields must be filled!", "Input Error", JOptionPane.ERROR_MESSAGE);
 
-        else if(!ValidName(FirstName))
+        else if (!ValidName(FirstName))
             JOptionPane.showMessageDialog(this, "Invalid First Name", "Input Error", JOptionPane.ERROR_MESSAGE);
 
-        else if(!ValidName(LastName))
+        else if (!ValidName(LastName))
             JOptionPane.showMessageDialog(this, "Invalid Last Name", "Input Error", JOptionPane.ERROR_MESSAGE);
 
-        else if(!ValidAge(Age))
+        else if (!ValidAge(Age))
             JOptionPane.showMessageDialog(this, "Invalid Age", "Input Error", JOptionPane.ERROR_MESSAGE);
 
-        else if(!ValidGpa(GPA))
+        else if (!ValidGpa(GPA))
             JOptionPane.showMessageDialog(this, "Invalid GPA", "Input Error", JOptionPane.ERROR_MESSAGE);
 
-        else{
+        else {
             String FullName = FirstName + " " + LastName;
-            if(ID.isEmpty()) {
-                if(admin.addStudent(FullName,Integer.parseInt(Age),Gen,Dep,Float.parseFloat(GPA)))
-                    JOptionPane.showMessageDialog(this, "student Added Successfully","Input Error", JOptionPane.INFORMATION_MESSAGE);
-                else JOptionPane.showMessageDialog(this, "Duplicate Record", "Input Error", JOptionPane.ERROR_MESSAGE);
-            }
-            else{
-                if(ValidID(ID))
-                    if(admin.addStudent(Integer.parseInt(ID),FullName,Integer.parseInt(Age),Gen,Dep,Float.parseFloat(GPA)))
-                        JOptionPane.showMessageDialog(this, "student Added Successfully", "Input Error", JOptionPane.INFORMATION_MESSAGE);
-                    else JOptionPane.showMessageDialog(this, "Duplicate Record", "Input Error", JOptionPane.ERROR_MESSAGE);
-                else JOptionPane.showMessageDialog(this, "Invalid ID", "Input Error", JOptionPane.ERROR_MESSAGE);
+            if (ID.isEmpty()) {
+                if (admin.addStudent(FullName, Integer.parseInt(Age), Gen, Dep, Float.parseFloat(GPA)))
+                    JOptionPane.showMessageDialog(this, "Student Added Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                else
+                    JOptionPane.showMessageDialog(this, "Duplicate Record", "Input Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                if (ValidID(ID))
+                    if (admin.addStudent(Integer.parseInt(ID), FullName, Integer.parseInt(Age), Gen, Dep, Float.parseFloat(GPA)))
+                        JOptionPane.showMessageDialog(this, "Student Added Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    else
+                        JOptionPane.showMessageDialog(this, "Duplicate Record", "Input Error", JOptionPane.ERROR_MESSAGE);
+                else
+                    JOptionPane.showMessageDialog(this, "Invalid ID", "Input Error", JOptionPane.ERROR_MESSAGE);
             }
             admin.save();
 
@@ -79,10 +89,9 @@ public class AddStudentPanel extends JFrame{
             LnameText.setText("");
             AgeText.setText("");
             GPAtext.setText("");
-
-
         }
     }
+
 
     private boolean ValidName(String name){
         if(name.matches("[a-zA-Z]+") && name.length() <= 15) return true;
@@ -115,9 +124,4 @@ public class AddStudentPanel extends JFrame{
         return false;
     }
 
-    public static void main(String[] args){
-        AddStudentPanel Panel = new AddStudentPanel();
-    }
 }
-
-
