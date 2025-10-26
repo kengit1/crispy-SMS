@@ -7,17 +7,25 @@ public class Admin {
         dataBase = new StudentDatabase("StudentsDatabase.txt");
         dataBase.readFromFile();
     }
-
-    public boolean addStudent(String name, int age, String gender, String department, float GPA){
+    //betdilo el ID.
+    public boolean addStudent(int ID, String name, int age, String gender, String department, float GPA){
+        Student student = new Student(ID,name,age,gender,department,GPA);
+        if(dataBase.insertRecord(student)) return true;
+        else return false;
+    }
+    //by3ml generate llID.
+    public boolean addStudent(String name,int age,String gender,String department,float GPA){
         Random random = new Random();
         int randomInt = random.nextInt(1000) + 9000;
         StudentDatabase database1 = new StudentDatabase("StudentsDatabase.txt");
         database1.readFromFile();
         while(database1.contains(String.valueOf(randomInt))) randomInt = (randomInt + 1) % 10000;
+
         Student student = new Student(randomInt,name,age,gender,department,GPA);
-        dataBase.insertRecord(student);
-        return true;
+        if(dataBase.insertRecord(student)) return true;
+        else return false;
     }
+
     public Student[] getListOfStudents() {
         int x = dataBase.returnAllRecords().size();
         return dataBase.returnAllRecords().toArray(new Student[x]);
@@ -27,13 +35,16 @@ public class Admin {
         dataBase.deleteRecord(key);
         return true;
     }
+
     public Student SearchStudentByID(String ID){
         return dataBase.getRecord(ID);
     }
+
     public Student SearchStudentByName(String name){
         return dataBase.getRecordByName(name);
     }
-    public void logout() {
+
+    public void save() {
         dataBase.saveToFile();
     }
 }

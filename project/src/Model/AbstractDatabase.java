@@ -26,7 +26,7 @@ public abstract class AbstractDatabase<T extends Record> {
                 if(iniRecord != null)
                     records.add(iniRecord) ;
             }
-            System.out.println("*Done acquiring the data from the database") ;
+            //System.out.println("*Done acquiring the data from the database") ;
             reader.close(); // redundant ?
         } catch (FileNotFoundException e) {
             System.out.println("File was not found");
@@ -42,13 +42,16 @@ public abstract class AbstractDatabase<T extends Record> {
 
     public abstract boolean contains(String key);
     public abstract   T getRecord(String Key) ;
-    public void insertRecord(T record) {
+    public boolean insertRecord(T record) {
         // Safe from Duplications
         if (!contains(record.getSearchKey())) {
             records.add(record);
+            return true;
         }
-        else
-            System.out.println("*Duplicate record, process terminated");
+        else {
+            //System.out.println("*Duplicate record, process terminated");
+            return false;
+        }
     }
     public void deleteRecord(String Key)
     {
@@ -65,7 +68,7 @@ public abstract class AbstractDatabase<T extends Record> {
                 writer.write(record.lineRepresentation()+"\n");
                 writer.flush();
             }
-            System.out.println("*Done writing the file");
+            //System.out.println("*Done writing the file");
         }catch (FileNotFoundException e) {
             System.out.println("*File was not found");
         } catch (IOException e) {
