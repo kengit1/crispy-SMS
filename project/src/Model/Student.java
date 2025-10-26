@@ -6,13 +6,13 @@ public class Student implements Record {
     private final String name,gender;
     private String department;
 
-    public Student(int ID,String name,int age,String gender,String department,float GPA){
+    public Student(int ID, String name, int age, String gender, String department, double GPA){
         this.name = name;
         this.gender = gender;
         this.department = department;
         this.ID = ID;
         this.age = age;
-        this.GPA = GPA;
+        this.GPA = (float) GPA;
     }
 
     public int getID(){
@@ -57,6 +57,6 @@ public class Student implements Record {
 
     @Override
     public String getSearchKey(){
-        return Integer.toString(ID);
+        return Integer.toString(Integer.parseInt(String.valueOf(ID)));
     }
 }
