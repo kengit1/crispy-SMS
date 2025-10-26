@@ -19,7 +19,7 @@ public class MainFrame extends JFrame {
         admin = new Admin();
 
         // Setup the Main Frame
-        setTitle("Student Management System Dashboard"); // [cite: 7, 96]
+        setTitle("Crispy SMS Dashboard"); // [cite: 7, 96]
         setSize(800, 600); // Made it a bit bigger
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -84,7 +84,7 @@ public class MainFrame extends JFrame {
         cardLayout.show(mainContentPanel, "HOME");
     }
 
-
+/*
     // You can remove this main method if you want.
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -92,5 +92,5 @@ public class MainFrame extends JFrame {
             // The *real* app should be run from LoginScreen.java
             new MainFrame().setVisible(true);
         });
-    }
+    }*/
 }

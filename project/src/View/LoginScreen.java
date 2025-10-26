@@ -17,7 +17,7 @@ class LoginScreen extends JFrame {
     public LoginScreen() {
         this.user = new Login();
 
-        setTitle("Student Managment System");
+        setTitle("Crispy SMS");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 250);
         setLocationRelativeTo(null);
