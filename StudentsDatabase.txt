@@ -1,0 +1,10 @@
+1001,Ali Hassan,20,Male,Computer Engineering,3.75
+1002,Sara Mohamed,19,Female,Electrical Engineering,3.60
+1003,Ahmed Tarek,21,Male,Mechanical Engineering,3.20
+1004,Lina Youssef,22,Female,Civil Engineering,3.45
+1005,Mostafa Khaled,20,Male,Mechatronics,3.90
+1006,Hana Adel,19,Female,Biomedical Engineering,3.70
+1007,Omar Fathy,21,Male,Software Engineering,3.50
+1008,Nour Alaa,20,Female,Architecture,3.80
+1009,Karim Samir,22,Male,Industrial Engineering,3.25
+1010,Mai Nader,19,Female,Communications Engineering,3.65

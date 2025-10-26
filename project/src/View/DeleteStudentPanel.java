@@ -1,95 +1,114 @@
 package View;
 
+import Model.Admin;
+import Model.Student;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.BorderLayout;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.*;
 
 public class DeleteStudentPanel extends JPanel {
-    private JTable table;
-    private DefaultTableModel model;
-    private JTextField searchField;
-    private JComboBox<String> searchType;
-    private final File studentFile = new File("StudentsDatabase.txt");
+    private final Admin admin;
+    private final JTable table;
+    private final DefaultTableModel model;
+    private final JTextField searchField;
+    private final JButton deleteButton;
 
-    public DeleteStudentPanel() {
-        setLayout(new BorderLayout());
-        model = new DefaultTableModel(new String[]{"ID", "Name", "Age", "Gender", "Dept", "GPA"}, 0);
+    public DeleteStudentPanel(Admin admin) {
+        this.admin = admin;
+        setLayout(new BorderLayout(10, 10));
+        setBackground(Color.WHITE);
+
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        topPanel.add(new JLabel("Search:"));
+        searchField = new JTextField(20);
+        topPanel.add(searchField);
+        JButton searchButton = new JButton("Search");
+        topPanel.add(searchButton);
+        JButton showAllButton = new JButton("Show All");
+        topPanel.add(showAllButton);
+        add(topPanel, BorderLayout.NORTH);
+
+        String[] columns = {"Student ID", "Name", "Department", "GPA"};
+        model = new DefaultTableModel(columns, 0);
         table = new JTable(model);
         add(new JScrollPane(table), BorderLayout.CENTER);
 
-        JPanel bottom = new JPanel();
-        searchType = new JComboBox<>(new String[]{"Student ID", "Name"});
-        searchField = new JTextField(10);
-        JButton search = new JButton("Search");
-        JButton refresh = new JButton("Refresh");
-        JButton delete = new JButton("Delete");
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        deleteButton = new JButton("Delete Selected");
+        bottomPanel.add(deleteButton);
+        add(bottomPanel, BorderLayout.SOUTH);
 
-        search.addActionListener(e -> searchStudent());
-        refresh.addActionListener(e -> loadStudents());
-        delete.addActionListener(e -> deleteStudent());
+        loadStudents(admin.getListOfStudents());
 
-        bottom.add(new JLabel("Search by:"));
-        bottom.add(searchType);
-        bottom.add(searchField);
-        bottom.add(search);
-        bottom.add(refresh);
-        bottom.add(delete);
-
-        add(bottom, BorderLayout.SOUTH);
-        loadStudents();
+        searchButton.addActionListener(e -> searchStudents());
+        showAllButton.addActionListener(e -> loadStudents(admin.getListOfStudents()));
+        deleteButton.addActionListener(e -> deleteSelectedStudent());
     }
 
-    private List<String[]> readAllStudents() {
-        List<String[]> list = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(studentFile))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (!line.trim().isEmpty()) list.add(line.split(","));
-            }
-        } catch (IOException ignored) {}
-        return list;
-    }
-
-    private void loadStudents() {
+    private void loadStudents(Student[] students) {
         model.setRowCount(0);
-        for (String[] s : readAllStudents())
-            if (s.length >= 6)
-                model.addRow(new Object[]{s[0], s[1], s[2], s[3], s[4], s[5]});
-    }
-
-    private void searchStudent() {
-        String text = searchField.getText().trim();
-        if (text.isEmpty()) return;
-        model.setRowCount(0);
-        for (String[] s : readAllStudents()) {
-            if (searchType.getSelectedItem().equals("Student ID") && s[0].equals(text)
-                    || searchType.getSelectedItem().equals("Name") && s[1].equalsIgnoreCase(text)) {
-                model.addRow(new Object[]{s[0], s[1], s[2], s[3], s[4], s[5]});
-            }
+        if (students == null) return;
+        for (Student s : students) {
+            model.addRow(new Object[]{
+                    s.getID(),
+                    s.getName(),
+                    s.getDepartment(),
+                    String.format("%.2f", s.getGPA())
+            });
         }
     }
 
-    private void deleteStudent() {
+    private void searchStudents() {
+        String keyword = searchField.getText().trim();
+        if (keyword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter a student name or ID to search.");
+            return;
+        }
+
+        Student byID = admin.SearchStudentByID(keyword);
+        if (byID != null) {
+            loadStudents(new Student[]{byID});
+            return;
+        }
+
+        Student byName = admin.SearchStudentByName(keyword);
+        if (byName != null) {
+            loadStudents(new Student[]{byName});
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this, "No student found.");
+        loadStudents(admin.getListOfStudents());
+    }
+
+    private void deleteSelectedStudent() {
         int row = table.getSelectedRow();
-        if (row == -1) return;
-        String idToDelete = String.valueOf(model.getValueAt(row, 0));
-        List<String[]> students = readAllStudents();
-        students.removeIf(s -> s[0].equals(idToDelete));
-        try (PrintWriter pw = new PrintWriter(new FileWriter(studentFile))) {
-            for (String[] s : students) pw.println(String.join(",", s));
-        } catch (IOException ignored) {}
-        loadStudents();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a student to delete.");
+            return;
+        }
+
+        String id = model.getValueAt(row, 0).toString();
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to delete student ID " + id + "?",
+                "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            admin.removeStudent(id);
+            admin.logout();
+            JOptionPane.showMessageDialog(this, "Student deleted successfully!");
+            loadStudents(admin.getListOfStudents());
+        }
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
+            Admin admin = new Admin();
             JFrame f = new JFrame("Delete Student Panel");
             f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             f.setSize(700, 400);
-            f.add(new DeleteStudentPanel());
+            f.add(new DeleteStudentPanel(admin));
             f.setLocationRelativeTo(null);
             f.setVisible(true);
         });
