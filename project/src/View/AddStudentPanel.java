@@ -3,14 +3,13 @@ package View;
 import Model.Admin;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AddStudentPanel extends JFrame{
     private JPanel Container1;
-    private JTextField IDText;
     private JTextField FnameText;
+    private JTextField IDText;
     private JTextField LnameText;
     private JComboBox Departement;
     private JTextField AgeText;
@@ -75,7 +74,7 @@ public class AddStudentPanel extends JFrame{
             admin.save();
 
             IDText.setText("");
-            FnameText.setText("");
+            IDText.setText("");
             LnameText.setText("");
             AgeText.setText("");
             GPAtext.setText("");

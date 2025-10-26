@@ -16,10 +16,10 @@
         </constraints>
         <properties>
           <font size="17"/>
-          <text value="ID:"/>
+          <text value="First name:"/>
         </properties>
       </component>
-      <component id="c7e24" class="javax.swing.JTextField" binding="FnameText">
+      <component id="c7e24" class="javax.swing.JTextField" binding="IDText">
         <constraints>
           <grid row="0" column="6" row-span="2" col-span="15" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -43,7 +43,7 @@
           </model>
         </properties>
       </component>
-      <component id="6bae2" class="javax.swing.JTextField" binding="LnameText">
+      <component id="6bae2" class="javax.swing.JTextField" binding="AgeText">
         <constraints>
           <grid row="2" column="6" row-span="2" col-span="15" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -53,7 +53,7 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="f1dad" class="javax.swing.JTextField" binding="IDText">
+      <component id="f1dad" class="javax.swing.JTextField" binding="FnameText">
         <constraints>
           <grid row="0" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -78,7 +78,7 @@
         </constraints>
         <properties>
           <font size="14"/>
-          <text value=" First name:"/>
+          <text value="ID:"/>
         </properties>
       </component>
       <component id="b2f17" class="javax.swing.JLabel">
@@ -87,7 +87,7 @@
         </constraints>
         <properties>
           <font size="14"/>
-          <text value="Last name:"/>
+          <text value="Age:"/>
         </properties>
       </component>
       <component id="17ba4" class="javax.swing.JLabel">
@@ -96,17 +96,7 @@
         </constraints>
         <properties>
           <font size="17"/>
-          <text value="Age:"/>
-        </properties>
-      </component>
-      <component id="29c89" class="javax.swing.JTextField" binding="AgeText">
-        <constraints>
-          <grid row="2" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value=""/>
+          <text value="Last name:"/>
         </properties>
       </component>
       <component id="b2e94" class="javax.swing.JLabel">
@@ -161,6 +151,16 @@
           <grid row="5" column="2" row-span="1" col-span="11" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
+      <component id="29c89" class="javax.swing.JTextField" binding="LnameText">
+        <constraints>
+          <grid row="2" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

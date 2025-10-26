@@ -74,7 +74,7 @@ class LoginScreen extends JFrame {
                         "Login Successful! Welcome, Admin.",
                         "Success",
                         JOptionPane.INFORMATION_MESSAGE);
-                //openDashboard();
+                openDashboard();
                 dispose();
                 break;
             case 1:
@@ -120,6 +120,10 @@ class LoginScreen extends JFrame {
 
         dashboard.setVisible(true);
     }*/
+
+    private void openDashboard(){
+        Dashboard dashboardpanel = new Dashboard();
+    }
 
 
 
