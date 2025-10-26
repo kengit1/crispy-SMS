@@ -5,4 +5,3 @@
 1005,Mostafa Khaled,20,Male,Mechatronics,3.9
 1006,Hana Adel,19,Female,Biomedical Engineering,3.7
 1007,Omar Fathy,21,Male,Software Engineering,3.5
-1008,Nour Alaa,20,Female,Architecture,3.8

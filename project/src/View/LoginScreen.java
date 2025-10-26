@@ -74,7 +74,7 @@ class LoginScreen extends JFrame {
                         "Login Successful! Welcome, Admin.",
                         "Success",
                         JOptionPane.INFORMATION_MESSAGE);
-                //openDashboard();
+                openDashboard();
                 dispose();
                 break;
             case 1:
@@ -109,7 +109,7 @@ class LoginScreen extends JFrame {
 
 
 
-    /*private void openDashboard() {
+    private void openDashboard() {
         JFrame dashboard = new JFrame("SMS Dashboard - Home Screen");
         dashboard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         dashboard.setSize(800, 600);
@@ -119,7 +119,7 @@ class LoginScreen extends JFrame {
         dashboard.add(welcomeLabel, BorderLayout.CENTER);
 
         dashboard.setVisible(true);
-    }*/
+    }
 
 
 
