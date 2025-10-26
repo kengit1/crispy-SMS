@@ -24,11 +24,6 @@ public class AddStudentPanel extends JPanel {
     public AddStudentPanel(Admin admin) {
 
         this.admin = admin;
-
-
-
-
-
         add(Container1);
 
         ENTERButton.addActionListener(new ActionListener() {
@@ -67,27 +62,33 @@ public class AddStudentPanel extends JPanel {
 
         else {
             String FullName = FirstName + " " + LastName;
+            boolean flag = false;
             if (ID.isEmpty()) {
-                if (admin.addStudent(FullName, Integer.parseInt(Age), Gen, Dep, Float.parseFloat(GPA)))
+                if (admin.addStudent(FullName, Integer.parseInt(Age), Gen, Dep, Float.parseFloat(GPA))) {
                     JOptionPane.showMessageDialog(this, "Student Added Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    flag = true;
+                }
                 else
                     JOptionPane.showMessageDialog(this, "Duplicate Record", "Input Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 if (ValidID(ID))
-                    if (admin.addStudent(Integer.parseInt(ID), FullName, Integer.parseInt(Age), Gen, Dep, Float.parseFloat(GPA)))
+                    if (admin.addStudent(Integer.parseInt(ID), FullName, Integer.parseInt(Age), Gen, Dep, Float.parseFloat(GPA))){
                         JOptionPane.showMessageDialog(this, "Student Added Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        flag = true;
+                    }
                     else
                         JOptionPane.showMessageDialog(this, "Duplicate Record", "Input Error", JOptionPane.ERROR_MESSAGE);
                 else
                     JOptionPane.showMessageDialog(this, "Invalid ID", "Input Error", JOptionPane.ERROR_MESSAGE);
             }
             admin.save();
-
-            IDText.setText("");
-            IDText.setText("");
-            LnameText.setText("");
-            AgeText.setText("");
-            GPAtext.setText("");
+            if(flag) {
+                IDText.setText("");
+                FnameText.setText("");
+                LnameText.setText("");
+                AgeText.setText("");
+                GPAtext.setText("");
+            }
         }
     }
 
