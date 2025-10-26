@@ -37,22 +37,22 @@ public class Admin {
     }
 
     public boolean updateStudent(String ID, int newAge, String newDepartment, float newGPA) {
-        // 1. ابحث عن الطالب باستخدام دالة getRecord الموجودة عندك
+
         Student studentToUpdate = dataBase.getRecord(ID);
 
-        // 2. تحقق إذا كان الطالب موجوداً
+
         if (studentToUpdate != null) {
-            // 3. قم بتحديث البيانات باستخدام الـ Setters الموجودة في كلاس Student
+
             studentToUpdate.setAge(newAge);
             studentToUpdate.setDepartment(newDepartment);
             studentToUpdate.setGPA(newGPA);
 
-            // 4. احفظ التغييرات في الملف فوراً [cite: 42, 44]
+
             dataBase.saveToFile();
-            return true; // تمت العملية بنجاح
+            return true;
         }
 
-        // إذا لم يتم العثور على الطالب
+
         return false;
     }
 
