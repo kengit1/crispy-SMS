@@ -3,7 +3,7 @@ import java.util.*;
 public class Admin {
     private final StudentDatabase dataBase;
 
-    Admin() {
+    public Admin() {
         dataBase = new StudentDatabase("StudentsDatabase.txt");
         dataBase.readFromFile();
     }
