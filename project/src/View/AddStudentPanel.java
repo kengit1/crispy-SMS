@@ -115,7 +115,7 @@ public class AddStudentPanel extends JPanel {
         boolean ThirdCondition = false;
 
         if(tokens.length == 2) {
-            FirstCondition = tokens[0].matches("\\d+") && tokens[0].length() == 1;
+            FirstCondition = tokens[0].matches("\\d+") && tokens[0].length() == 1 && Integer.parseInt(tokens[0]) <= 4;
             SecondCondition = tokens[1].matches("\\d+") && tokens[1].length() == 2;
             ThirdCondition = Gpa.length() == 4;
         }
