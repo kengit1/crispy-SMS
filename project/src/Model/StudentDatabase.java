@@ -23,24 +23,6 @@ public class StudentDatabase extends AbstractDatabase<Student>{
         );
     }
 
-    @Override
-    public boolean contains(String Key)
-    {
-        return returnAllRecords().stream().anyMatch(record -> Key.equals(record.getSearchKey()));
-        // better to avoid the null from the records
-    }
-
-    @Override
-    public Student getRecord(String Key)
-    {
-        return returnAllRecords().stream().filter(
-                        record -> Key.equals(record.getSearchKey()))
-                .findFirst().orElse(null) ;
-        /* converted the Collection of ArrayList into a Stream of data which
-         *  Java will do searching on it instead of the OG For loop ❤️
-         *  */
-    }
-
     public Student getRecordByName(String name){
         return returnAllRecords().stream().filter(
                 record -> name.equals(record.getName()))

@@ -40,8 +40,15 @@ public abstract class AbstractDatabase<T extends Record> {
         return records ; //needs this ?
     }
 
-    public abstract boolean contains(String key);
-    public abstract   T getRecord(String Key) ;
+    public  boolean contains(String key)
+    {
+        return returnAllRecords().stream().anyMatch(record -> key.equals(record.getSearchKey()));
+    }
+    public    T getRecord(String key){
+        return returnAllRecords().stream().filter(
+                        record -> key.equals(record.getSearchKey()))
+                .findFirst().orElse(null) ;
+    }
     public boolean insertRecord(T record) {
         // Safe from Duplications
         if (!contains(record.getSearchKey())) {
